@@ -15,7 +15,7 @@
             --accent-color: #00FF00;
             --muted-color: #555555;
             --dark-red: #800000;
-            --light-gray: #B0B0B0; /* Slightly darker gray for subtle cloud enhancement */
+            --light-gray: #B0B0B0;
         }
         html, body {
             height: 100%;
@@ -25,12 +25,13 @@
         body {
             display: flex;
             flex-direction: column;
+            background-color: white;
         }
         #header {
             display: flex;
             align-items: center;
             min-height: 0;
-            padding: 10px 0; /* Slight height increase */
+            padding: 10px 0;
         }
         #logo {
             display: block;
@@ -42,6 +43,10 @@
             #logo {
                 max-width: 40%;
                 overflow: hidden;
+                padding: 0;
+            }
+            #header {
+                padding: 5px 0;
             }
         }
         #black-box {
@@ -79,13 +84,13 @@
             cursor: pointer;
             font-size: 2em;
             font-weight: bold;
-            color: #FFFFFF; /* White icon */
+            color: #FFFFFF;
             transition: color 0.2s ease-in-out;
             user-select: none;
-            z-index: 102; /* Above black box */
+            z-index: 102;
         }
         #audio-controls:hover {
-            color: #CCCCCC; /* Light gray hover for contrast */
+            color: #CCCCCC;
         }
         #audio-controls.playing {
             color: var(--accent-color);
@@ -111,7 +116,7 @@
         particlesJS("background-layer", {
             "particles": {
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#B0B0B0" }, /* Slightly darker for subtle visibility */
+                "color": { "value": "#B0B0B0" },
                 "shape": { "type": "image", "image": { "src": "clouds.png", "width": 100, "height": 100 } },
                 "opacity": { "value": 0.2, "random": true },
                 "size": { "value": 50, "random": true },
@@ -125,7 +130,7 @@
         // Foreground interactive particles with lines
         particlesJS("particles-fg", {
             "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } }, // Increased by 50% (80 to 120)
                 "color": { "value": "#800000" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 1, "random": false },
