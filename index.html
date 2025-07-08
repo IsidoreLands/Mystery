@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mystery Babylon | OODA WIKI</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --background-color: #000000;
+            --accent-color: #00FF00;
+            --muted-color: #555555;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        #header {
+            display: flex;
+            align-items: center;
+        }
+        #logo {
+            display: block;
+        }
+        #black-box {
+            flex-grow: 1;
+            background-color: var(--background-color);
+        }
+        #main-content {
+            flex: 1;
+            background-color: white;
+            position: relative;
+        }
+        #audio-controls {
+            position: fixed;
+            top: 20px;
+            right: 25px;
+            cursor: pointer;
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--muted-color);
+            transition: color 0.2s ease-in-out;
+            user-select: none;
+            z-index: 101;
+        }
+        #audio-controls:hover {
+            color: #FFFFFF;
+        }
+        #audio-controls.playing {
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <div id="header">
+        <img id="logo" src="OODA Mystery.png" alt="OODA Mystery Logo">
+        <div id="black-box"></div>
+    </div>
+    <div id="main-content"></div>
+    <div id="audio-controls" title="Toggle Audio">♪</div>
+    
+    <audio id="mysteryAudio" src="mystery_audio.mp3" loop></audio>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        // Particles.js configuration
+        particlesJS("main-content", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#FF2400" }, // Scarlet red
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "repulse": { "distance": 150, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+            }
+        });
+        
+        // Click counter for mailto trigger
+        const canvas = document.querySelector('#main-content canvas');
+        let clickCount = 0;
+        canvas.addEventListener('click', () => {
+            clickCount++;
+            if (clickCount >= 12) {
+                window.location.href = "mailto:admin@ooda.wiki?subject=Request%20to%20Do%20(Mystery%20Babylon)&body=I%20have%20made%20the%20decision%20to%20do%20something.%0A%0AI%20am%20ready%20for%20my%20first%20Saga.";
+                clickCount = 0; // Reset counter after triggering
+            }
+        });
+        
+        // Audio control
+        const audio = document.getElementById('mysteryAudio');
+        const audioControl = document.getElementKId('audio-controls');
+        let hasInteracted = false;
+        
+        function initialPlay() {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                audio.play().then(() => { audioControl.classList.add('playing'); })
+                    .catch(error => { console.log('Autoplay prevented by browser.'); });
+            }
+        }
+        
+        function toggleAudio() {
+            if (!hasInteracted) { initialPlay(); return; }
+            if (audio.paused) {
+                audio.play();
+                audioControl.classList.add('playing');
+            } else {
+                audio.pause();
+                audioControl.classList.remove('playing');
+            }
+        }
+        
+        // Trigger initial play on first canvas click
+        canvas.addEventListener('click', initialPlay, { once: true });
+        audioControl.addEventListener('click', toggleAudio);
+    </script>
+</body>
+</html>
