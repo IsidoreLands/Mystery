@@ -21,32 +21,32 @@
             height: 100%;
             margin: 0;
             overflow: hidden;
+            background-color: var(--background-color); /* Black background for entire page */
         }
         body {
             display: flex;
             flex-direction: column;
-            background-color: white;
         }
         #header {
             display: flex;
             align-items: center;
-            min-height: 0;
-            padding: 10px 0;
+            min-height: 80px; /* Fixed height to ensure black fills top */
+            padding: 0; /* Remove padding to eliminate gaps */
+            background-color: var(--background-color); /* Ensure black background */
         }
         #logo {
             display: block;
-            max-width: 20%;
+            max-width: 25%; /* Slightly larger to fit toggle */
             height: auto;
-            margin: 0;
+            margin: 0 10px; /* Add some spacing */
         }
         @media (max-width: 768px) {
             #logo {
-                max-width: 40%;
+                max-width: 50%; /* Larger on mobile to balance toggle */
                 overflow: hidden;
-                padding: 0;
             }
             #header {
-                padding: 5px 0;
+                min-height: 60px; /* Adjust for mobile */
             }
         }
         #black-box {
@@ -54,6 +54,23 @@
             background-color: var(--background-color);
             height: 100%;
             min-height: inherit;
+        }
+        #audio-toggle {
+            position: relative;
+            margin-left: auto; /* Push to right */
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 1.5em; /* Slightly smaller to fit */
+            font-weight: bold;
+            color: #FFFFFF;
+            transition: color 0.2s ease-in-out;
+            user-select: none;
+        }
+        #audio-toggle:hover {
+            color: #CCCCCC;
+        }
+        #audio-toggle.playing {
+            color: var(--accent-color);
         }
         #main-content {
             flex: 1;
@@ -77,36 +94,18 @@
             height: 100%;
             z-index: 3;
         }
-        #audio-controls {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 2em;
-            font-weight: bold;
-            color: #FFFFFF;
-            transition: color 0.2s ease-in-out;
-            user-select: none;
-            z-index: 102;
-        }
-        #audio-controls:hover {
-            color: #CCCCCC;
-        }
-        #audio-controls.playing {
-            color: var(--accent-color);
-        }
     </style>
 </head>
 <body>
     <div id="header">
         <img id="logo" src="OODA Mystery.png" alt="OODA Mystery Logo">
         <div id="black-box"></div>
+        <div id="audio-toggle" title="Toggle Audio">♪</div>
     </div>
     <div id="background-layer"></div>
     <div id="main-content">
         <div id="particles-fg"></div>
     </div>
-    <div id="audio-controls" title="Toggle Audio">♪</div>
     
     <audio id="mysteryAudio" src="mystery_audio.mp3" loop></audio>
     
@@ -130,7 +129,7 @@
         // Foreground interactive particles with lines
         particlesJS("particles-fg", {
             "particles": {
-                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } }, // Increased by 50% (80 to 120)
+                "number": { "value": 120, "density": { "enable": true, "value_area": 800 } },
                 "color": { "value": "#800000" },
                 "shape": { "type": "circle" },
                 "opacity": { "value": 1, "random": false },
@@ -163,7 +162,7 @@
         
         // Audio control
         const audio = document.getElementById('mysteryAudio');
-        const audioControl = document.getElementById('audio-controls');
+        const audioControl = document.getElementById('audio-toggle');
         let hasInteracted = false;
         
         function initialPlay() {
