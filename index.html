@@ -15,7 +15,7 @@
             --accent-color: #00FF00;
             --muted-color: #555555;
             --dark-red: #800000;
-            --light-gray: #D3D3D3; /* Light gray for clouds */
+            --light-gray: #B0B0B0; /* Slightly darker gray for subtle cloud enhancement */
         }
         html, body {
             height: 100%;
@@ -30,6 +30,7 @@
             display: flex;
             align-items: center;
             min-height: 0;
+            padding: 10px 0; /* Slight height increase */
         }
         #logo {
             display: block;
@@ -61,7 +62,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Behind main content */
+            z-index: 1;
         }
         #particles-fg {
             position: absolute;
@@ -69,22 +70,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 3; /* Above background, below UI */
+            z-index: 3;
         }
         #audio-controls {
-            position: fixed;
-            top: 20px;
-            right: 25px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
             cursor: pointer;
             font-size: 2em;
             font-weight: bold;
-            color: var(--muted-color);
+            color: #FFFFFF; /* White icon */
             transition: color 0.2s ease-in-out;
             user-select: none;
-            z-index: 101;
+            z-index: 102; /* Above black box */
         }
         #audio-controls:hover {
-            color: #FFFFFF;
+            color: #CCCCCC; /* Light gray hover for contrast */
         }
         #audio-controls.playing {
             color: var(--accent-color);
@@ -110,9 +111,9 @@
         particlesJS("background-layer", {
             "particles": {
                 "number": { "value": 50, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#D3D3D3" }, // Light gray for airy clouds
+                "color": { "value": "#B0B0B0" }, /* Slightly darker for subtle visibility */
                 "shape": { "type": "image", "image": { "src": "clouds.png", "width": 100, "height": 100 } },
-                "opacity": { "value": 0.2, "random": true }, // Very light and airy
+                "opacity": { "value": 0.2, "random": true },
                 "size": { "value": 50, "random": true },
                 "move": { "enable": true, "speed": 0.5, "direction": "top", "random": false, "straight": true, "out_mode": "out" }
             },
@@ -125,9 +126,9 @@
         particlesJS("particles-fg", {
             "particles": {
                 "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#800000" }, // Dark red
+                "color": { "value": "#800000" },
                 "shape": { "type": "circle" },
-                "opacity": { "value": 1, "random": false }, // Crisp, no transparency
+                "opacity": { "value": 1, "random": false },
                 "size": { "value": 3, "random": true },
                 "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out" },
                 "line_linked": {
@@ -151,7 +152,7 @@
             clickCount++;
             if (clickCount >= 12) {
                 window.location.href = "mailto:admin@ooda.wiki?subject=Request%20to%20Do%20(Mystery%20Babylon)&body=I%20have%20made%20the%20decision%20to%20do%20something.%0A%0AI%20am%20ready%20for%20my%20first%20Saga.";
-                clickCount = 0; // Reset counter after triggering
+                clickCount = 0;
             }
         });
         
